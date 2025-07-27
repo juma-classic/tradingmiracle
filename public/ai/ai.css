@@ -1,0 +1,401 @@
+/* Import additional Google Fonts for better typography */
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap';
+
+:root {
+    /* Navy Blue Theme (Default) */
+    --primary-light: #1a237e;
+    --primary-main: #0d47a1;
+    --primary-dark: #002171;
+    --secondary-light: #3949ab;
+    --text-primary: #e8f4fd;
+    --text-secondary: #b8d4f0;
+    --text-accent: #0f8;
+    --background: #0a1628;
+    --surface: #1e293b;
+    --border-light: #334155;
+    --success-main: #17db4e;
+    --error-main: #ff3b30;
+    --highlight-green: #0f8;
+    --highlight-glow: linear-gradient(135deg, #0f8, #00cc6a, #0a5);
+    --highlight-glow-shadow: rgb(0 255 136 / 40%);
+
+    /* Chart Colors */
+    --chart-blue: #4e79a7;
+    --chart-green: #59a14f;
+    --chart-red: #e15759;
+}
+
+/* Light Blue Theme */
+[data-theme='light'] {
+    --primary-light: #e6f2ff;
+    --primary-main: #07c;
+    --primary-dark: #005299;
+    --secondary-light: #f0f8ff;
+    --text-primary: #1a365d;
+    --text-secondary: #2d5a87;
+    --text-accent: #07c;
+    --background: #f8fbff;
+    --surface: #fff;
+    --border-light: #cce0ff;
+    --success-main: #17db4e;
+    --error-main: #ff3b30;
+    --highlight-green: #ffd700;
+    --highlight-glow: linear-gradient(135deg, #ffd700, #ffed4a, #f7dc6f);
+    --highlight-glow-shadow: rgb(255 215 0 / 30%);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark Navy Blue Theme */
+        --primary-light: #0f1419;
+        --primary-main: #1565c0;
+        --primary-dark: #0d47a1;
+        --secondary-light: #263238;
+        --text-primary: #e8eaed;
+        --text-secondary: #9aa0a6;
+        --background: #050b14;
+        --surface: #121926;
+        --border-light: #2d3748;
+        --success-main: #2ecc71;
+        --error-main: #ff6b6b;
+        --highlight-green: #0f8;
+        --highlight-glow: linear-gradient(135deg, #0f8, #00cc6a);
+        --highlight-glow-shadow: rgb(0 255 136 / 30%);
+    }
+}
+
+/* DOMINANT THEME ANALYSIS:
+ * 
+ * PRIMARY THEME: Navy Blue Trading Interface with Green Glow
+ * - Main colors: Navy blue (#0d47a1) and darker variants
+ * - Background: Deep navy (#0a1628) / Ultra dark navy (#050b14)
+ * - Accent: Green gradient glow (#00ff88) for highlights/current selections
+ * 
+ * DESIGN CHARACTERISTICS:
+ * - Professional navy blue color scheme
+ * - Green gradient glow for touched/active elements
+ * - Red upward-pointing cursor below active digit
+ * - Responsive design with mobile-first approach
+ * - Color-coded data visualization
+ * - Smooth transitions and glow effects
+ * - Typography: Rubik font family for readability
+ * 
+ * THEME ELEMENTS:
+ * 1. Navy blue-dominant color scheme (professional/trustworthy)
+ * 2. Green gradient glow highlights (modern/tech feel)
+ * 3. Red cursor pointing up from below
+ * 4. Traditional red/green for financial data
+ * 5. Adaptive light/dark mode support
+ * 6. Card-based layout with rounded corners
+ */
+
+/* Base Styles */
+body {
+    font-family: 'Inter', 'Rubik', sans-serif;
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    transition: all 0.4s ease;
+    font-weight: 400;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--surface);
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    border-bottom: 1px solid var(--border-light);
+}
+
+header h1 {
+    font-family: 'Orbitron', 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--text-accent), var(--primary-main));
+    background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: var(--text-accent);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+select,
+input {
+    padding: 0.5rem;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background-color: var(--surface);
+    color: var(--text-primary);
+    font-family: 'Rubik', sans-serif;
+    transition: all 0.3s;
+}
+
+select:focus,
+input:focus {
+    outline: none;
+    border-color: var(--primary-main);
+    box-shadow: 0 0 0 2px var(--highlight-glow);
+}
+
+/* Main Content Styles */
+main {
+    padding: 1rem 0;
+}
+
+section {
+    background-color: var(--surface);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 5%);
+    border: 1px solid var(--border-light);
+}
+
+h2 {
+    font-family: 'Orbitron', 'Inter', sans-serif;
+    color: var(--text-accent);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.3px;
+}
+
+/* Price Display */
+#current-price {
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--text-accent), var(--primary-main));
+    background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin: 1rem 0;
+    letter-spacing: 1px;
+}
+
+/* Digit Display */
+#digit-display-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0;
+}
+
+.digit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.digit-box {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    background-color: var(--primary-light);
+    color: var(--text-primary);
+    border: 2px solid var(--border-light);
+    transition: all 0.3s;
+}
+
+.digit-container.current .digit-box {
+    background: var(--highlight-glow);
+    border-color: var(--highlight-green);
+    color: #000;
+    box-shadow:
+        0 0 15px var(--highlight-glow-shadow),
+        0 0 30px var(--highlight-glow-shadow);
+}
+
+.digit-container.highest .digit-box {
+    background-color: var(--success-main);
+    border-color: var(--success-main);
+    color: #fff;
+}
+
+.digit-container.lowest .digit-box {
+    background-color: var(--error-main);
+    border-color: var(--error-main);
+    color: #fff;
+}
+
+.digit-percentage {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.4rem;
+    font-weight: 500;
+}
+
+.arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #ff3b30;
+    position: absolute;
+    bottom: -10px;
+    display: none;
+}
+
+.digit-container.current .arrow {
+    display: block;
+}
+
+/* Odd/Even Display */
+#last-50-oe-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.oe-box {
+    display: inline-block;
+    min-width: 24px;
+    min-height: 24px;
+    margin: 2px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-align: center;
+    transition:
+        background 0.3s,
+        box-shadow 0.3s;
+}
+
+.oe-box.even {
+    background: linear-gradient(135deg, #008000 0%, #1d9109 100%); /* green to neon green */
+    color: #fff;
+    border: 1px solid #21ae09;
+}
+
+.oe-box.odd {
+    background: linear-gradient(135deg, #850505 0%, #800000 100%); /* red to maroon */
+    color: #fff;
+    border: 1px solid #800000;
+}
+
+/* Chart Styles */
+canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 200px;
+    margin-top: 1rem;
+}
+
+/* Percentage Text Styles */
+#digit-percentage,
+#even-odd-percentage,
+#rise-fall-percentage {
+    display: block;
+    text-align: center;
+    margin: 0.7rem 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    background: linear-gradient(135deg, var(--primary-main), var(--text-accent));
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.4rem;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
+    font-size: 0.95rem;
+    margin-top: 1.8rem;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.theme-toggle-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgb(0 0 0 / 30%);
+    background: linear-gradient(135deg, var(--text-accent), var(--primary-main));
+}
+
+.theme-toggle-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive Adjustments */
+@media (width <= 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .digit-box {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+}
+
+@media (width <= 480px) {
+    header h1 {
+        font-size: 1.3rem;
+    }
+
+    .digit-box {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
+    .oe-box {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+}

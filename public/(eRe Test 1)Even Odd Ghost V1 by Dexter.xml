@@ -1,0 +1,528 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <variables>
+    <variable id="bApXT1A,+eLl!Y[O8Th*">Stake</variable>
+    <variable id="wL{Wo5qT|Bv=6v#EbWIc">lastDigit</variable>
+    <variable id="pWX~7zBFdJ9*{g_mFK,1">InitialStake</variable>
+    <variable id="Yc2(?I]yhjR)7r#JH(GU">2ndLastDigit</variable>
+    <variable id="lCN)@wBBD%s95n*|krf;">Martingale</variable>
+    <variable id="0#dL~P-qJAHY0vE|j[Un">3rdLastDigit</variable>
+    <variable id="kOkCBOE^nOst/^CC%ZIj">4thLastDigit</variable>
+  </variables>
+  <block type="trade_definition" id="L]!@sI`i(GoRN1H2nhv:" deletable="false" x="0" y="110">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="B::xUKiXi^%oem~,ffY@" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">random_index</field>
+        <field name="SYMBOL_LIST">1HZ10V</field>
+        <next>
+          <block type="trade_definition_tradetype" id="]qB}ZbRn!4iH!}s2vi-T" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">evenodd</field>
+            <next>
+              <block type="trade_definition_contracttype" id="t.VHR8of10v;(`6Q*1m9" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="B)q}1Mt]/1!XUSw8Im4!" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="dtYjF+u94EyVl;*2d$$U" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id=";uVM-6*p8.(Z3,kKd)Pg" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="hyXSMmEDZt+K68)]my@q">
+        <field name="VAR" id="bApXT1A,+eLl!Y[O8Th*">Stake</field>
+        <value name="VALUE">
+          <block type="math_number" id="ZOB}KJ}}lAy6RS;p`YT$">
+            <field name="NUM">0.35</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="~)TvrC2Dtt*6[.c:~)o@">
+            <field name="VAR" id="lCN)@wBBD%s95n*|krf;">Martingale</field>
+            <value name="VALUE">
+              <block type="math_number" id="Av]hRVSqEcTwybZvLrya">
+                <field name="NUM">2.1</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="$O0c@qQ5{B!c=Rf1[zUD">
+                <field name="VAR" id="pWX~7zBFdJ9*{g_mFK,1">InitialStake</field>
+                <value name="VALUE">
+                  <block type="math_number" id="k]3^C`fJHD,[$/DPgHt-">
+                    <field name="NUM">0.35</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <block type="trade_definition_tradeoptions" id="1N]Snj0{Zw,l?NF(4N,6">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="false"></mutation>
+        <field name="DURATIONTYPE_LIST">t</field>
+        <value name="DURATION">
+          <shadow type="math_number_positive" id="nrInt!hP+_e,[i6i/4x_">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number_positive" id=")s^]X_1w_Q9yg7NCbr^(">
+            <field name="NUM">0.35</field>
+          </shadow>
+          <block type="variables_get" id="YMMWQZ}=Zz/.NbV=}[]6">
+            <field name="VAR" id="bApXT1A,+eLl!Y[O8Th*">Stake</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="during_purchase" id="sg:nZ|Y]R6:IC0ECOMp)" x="970" y="110">
+    <statement name="DURING_PURCHASE_STACK">
+      <block type="controls_if" id="~)5)*W~f=_=%fhBx-~_5">
+        <value name="IF0">
+          <block type="check_sell" id="j8,x-qr~Nj3[Il.i0D0j"></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="after_purchase" id="yw4+^pU{9r:Gix*VrZuh" x="970" y="392">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="controls_if" id="ADHa(DB4]=JQ~@8Q~1*3">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <value name="IF0">
+          <block type="contract_check_result" id="*MR^nZk5bq_H.d!;Nca~">
+            <field name="CHECK_RESULT">loss</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="#`X!(Eo)C2QAZ,l.N$qt">
+            <field name="VAR" id="bApXT1A,+eLl!Y[O8Th*">Stake</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="$Sf$a!mYEp0;oH%:4miw">
+                <field name="OP">MULTIPLY</field>
+                <value name="A">
+                  <shadow type="math_number" id="vUE`}w#`{hV$sqnI=Ikk">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id="b8?91%.r[+U1+bZr8ED1">
+                    <field name="VAR" id="bApXT1A,+eLl!Y[O8Th*">Stake</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="`II4i]}4#Z_alt$s_-az">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id="H}?MooK]I}7vr5LIE-o~">
+                    <field name="VAR" id="lCN)@wBBD%s95n*|krf;">Martingale</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="tykDCvdM4R$JE~kX-+3s">
+            <field name="VAR" id="bApXT1A,+eLl!Y[O8Th*">Stake</field>
+            <value name="VALUE">
+              <block type="variables_get" id="3^9yY?{`CtL8f.0ia*1p">
+                <field name="VAR" id="pWX~7zBFdJ9*{g_mFK,1">InitialStake</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="trade_again" id="I*j.Xn)L7O%d!3VZ:jgw"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="vGLt2JXLp=gQ)z`/#XTx" deletable="false" x="0" y="890">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="controls_repeat_ext" id="{hF_GlK?u`}lIhk:T@=/">
+        <value name="TIMES">
+          <block type="math_constant" id="VtQw7v[rsJQE|qYYDIuc">
+            <field name="CONSTANT">INFINITY</field>
+          </block>
+        </value>
+        <statement name="DO">
+          <block type="timeout" id="*Me)|2IhcXaL@UCs|;z]">
+            <statement name="TIMEOUTSTACK">
+              <block type="variables_set" id="LHX/N|3C0U,FM^:@=`to">
+                <field name="VAR" id="wL{Wo5qT|Bv=6v#EbWIc">lastDigit</field>
+                <value name="VALUE">
+                  <block type="lists_getIndex" id="8pdJ$g@i{h)6uwdoKm:i">
+                    <mutation xmlns="http://www.w3.org/1999/xhtml" statement="false" at="true"></mutation>
+                    <field name="MODE">GET</field>
+                    <field name="WHERE">FROM_END</field>
+                    <value name="VALUE">
+                      <block type="lastDigitList" id="jD.o*g{St3|lF#iir;fs"></block>
+                    </value>
+                    <value name="AT">
+                      <block type="math_number" id=".EPr}olF^Sv0EOHbI2*+">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="kT77BRm!ArG7h/-u.C3i">
+                    <field name="VAR" id="Yc2(?I]yhjR)7r#JH(GU">2ndLastDigit</field>
+                    <value name="VALUE">
+                      <block type="lists_getIndex" id="3aHJJPob|HCWXz;b5b0N">
+                        <mutation xmlns="http://www.w3.org/1999/xhtml" statement="false" at="true"></mutation>
+                        <field name="MODE">GET</field>
+                        <field name="WHERE">FROM_END</field>
+                        <value name="VALUE">
+                          <block type="lastDigitList" id="o)/57N`@VBSuzE)%3mw["></block>
+                        </value>
+                        <value name="AT">
+                          <block type="math_number" id="c_s:fQhQ,)]~podDL2J0">
+                            <field name="NUM">2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="!@^kP-4W*qsznSR9spmz">
+                        <field name="VAR" id="0#dL~P-qJAHY0vE|j[Un">3rdLastDigit</field>
+                        <value name="VALUE">
+                          <block type="lists_getIndex" id="[cYjQt56nVDH~$QJu_lV">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" statement="false" at="true"></mutation>
+                            <field name="MODE">GET</field>
+                            <field name="WHERE">FROM_END</field>
+                            <value name="VALUE">
+                              <block type="lastDigitList" id=":*eh@5IMomfyR,FsmEQ{"></block>
+                            </value>
+                            <value name="AT">
+                              <block type="math_number" id="]k=/bk.Fx7$pN%29fzK+">
+                                <field name="NUM">3</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="K)5zKftpn16RD,.?T:jC">
+                            <field name="VAR" id="kOkCBOE^nOst/^CC%ZIj">4thLastDigit</field>
+                            <value name="VALUE">
+                              <block type="lists_getIndex" id="rviy*T(WP3OFa{_znfod">
+                                <mutation xmlns="http://www.w3.org/1999/xhtml" statement="false" at="true"></mutation>
+                                <field name="MODE">GET</field>
+                                <field name="WHERE">FROM_END</field>
+                                <value name="VALUE">
+                                  <block type="lastDigitList" id="N5y~n-aV;pY_#j=WsmPv"></block>
+                                </value>
+                                <value name="AT">
+                                  <block type="math_number" id="@/s$[oUo{,Xw`9G@kl^|">
+                                    <field name="NUM">4</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="notify" id="*9~egKC{5isGJm_n:Wnu">
+                                <field name="NOTIFICATION_TYPE">success</field>
+                                <field name="NOTIFICATION_SOUND">silent</field>
+                                <value name="MESSAGE">
+                                  <shadow type="text" id="-j$gO5[9cw~2F[PAy02o">
+                                    <field name="TEXT">last 2nd and 3rd Digit:</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="notify" id="3#_J?`zsils|TFM5A4+n">
+                                    <field name="NOTIFICATION_TYPE">success</field>
+                                    <field name="NOTIFICATION_SOUND">silent</field>
+                                    <value name="MESSAGE">
+                                      <shadow type="text" id="vL,W8A)_9pQgyY3X)@Q~">
+                                        <field name="TEXT"></field>
+                                      </shadow>
+                                      <block type="variables_get" id="UtV3birIN,Hp9QtW~E}6">
+                                        <field name="VAR" id="wL{Wo5qT|Bv=6v#EbWIc">lastDigit</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="notify" id="0]#}5p`[`+H9S2bjtfBP">
+                                        <field name="NOTIFICATION_TYPE">success</field>
+                                        <field name="NOTIFICATION_SOUND">silent</field>
+                                        <value name="MESSAGE">
+                                          <shadow type="text" id="vL,W8A)_9pQgyY3X)@Q~">
+                                            <field name="TEXT"></field>
+                                          </shadow>
+                                          <block type="variables_get" id="kn^VQ+pX2!LymQby.+~_">
+                                            <field name="VAR" id="Yc2(?I]yhjR)7r#JH(GU">2ndLastDigit</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="notify" id="[]Q5PU9mmQOO4}$rPt;)">
+                                            <field name="NOTIFICATION_TYPE">success</field>
+                                            <field name="NOTIFICATION_SOUND">silent</field>
+                                            <value name="MESSAGE">
+                                              <shadow type="text" id="vL,W8A)_9pQgyY3X)@Q~">
+                                                <field name="TEXT"></field>
+                                              </shadow>
+                                              <block type="variables_get" id="41y%E[?Ex,DPLn~fI}sO">
+                                                <field name="VAR" id="0#dL~P-qJAHY0vE|j[Un">3rdLastDigit</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="notify" id="eVRmmzpi,KmAE!%9j4K%">
+                                                <field name="NOTIFICATION_TYPE">success</field>
+                                                <field name="NOTIFICATION_SOUND">silent</field>
+                                                <value name="MESSAGE">
+                                                  <shadow type="text" id="vL,W8A)_9pQgyY3X)@Q~">
+                                                    <field name="TEXT"></field>
+                                                  </shadow>
+                                                  <block type="variables_get" id=",LL(]!e~=.Gg?gI/F^YJ">
+                                                    <field name="VAR" id="kOkCBOE^nOst/^CC%ZIj">4thLastDigit</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="controls_if" id="RpO{=]d-Jyh*L;W!!24$">
+                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                                                    <value name="IF0">
+                                                      <block type="math_number_property" id="Re/mfK5s4?=fG5UMo##@">
+                                                        <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+                                                        <field name="PROPERTY">ODD</field>
+                                                        <value name="NUMBER_TO_CHECK">
+                                                          <shadow type="math_number" id="@Ew[[=Ev*q)6Lq?[oUK(">
+                                                            <field name="NUM">0</field>
+                                                          </shadow>
+                                                          <block type="variables_get" id="dmN:z|I|cd00xqdrR8;:">
+                                                            <field name="VAR" id="wL{Wo5qT|Bv=6v#EbWIc">lastDigit</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="DO0">
+                                                      <block type="purchase" id=";3S7K+GiyH;)u/Lykx-X">
+                                                        <field name="PURCHASE_LIST">DIGITODD</field>
+                                                      </block>
+                                                    </statement>
+                                                    <statement name="ELSE">
+                                                      <block type="controls_if" id="ddl!-R?gBIwX742H8:cG">
+                                                        <value name="IF0">
+                                                          <block type="math_number_property" id="wH8+tq.dcmM;PHPX3M6~">
+                                                            <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+                                                            <field name="PROPERTY">EVEN</field>
+                                                            <value name="NUMBER_TO_CHECK">
+                                                              <shadow type="math_number" id="@Ew[[=Ev*q)6Lq?[oUK(">
+                                                                <field name="NUM">0</field>
+                                                              </shadow>
+                                                              <block type="variables_get" id="ux!0qi#x^$4G!(Y,!SyY">
+                                                                <field name="VAR" id="wL{Wo5qT|Bv=6v#EbWIc">lastDigit</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="DO0">
+                                                          <block type="purchase" id="aa7]I`U%t5CBn]d$!z3$">
+                                                            <field name="PURCHASE_LIST">DIGITEVEN</field>
+                                                          </block>
+                                                        </statement>
+                                                        <next>
+                                                          <block type="controls_flow_statements" id="LNUC{-ln5[Jja=ao5gNZ">
+                                                            <field name="FLOW">BREAK</field>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="trade_again" id="ly$)GA[d$9)oi8Qhj?`A"></block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="SECONDS">
+              <block type="math_number" id="QJl7Urb^PN0_mx5iO,ud">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="variables_get" id="xBU_Y:u-@{-ojz]_R-tG" disabled="true" x="609" y="1487">
+    <field name="VAR" id="wL{Wo5qT|Bv=6v#EbWIc">lastDigit</field>
+  </block>
+  <block type="math_number_property" id="5;0,qkEG9],sfv3FOU*-" disabled="true" x="501" y="1565">
+    <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+    <field name="PROPERTY">ODD</field>
+    <value name="NUMBER_TO_CHECK">
+      <shadow type="math_number" id="@Ew[[=Ev*q)6Lq?[oUK(">
+        <field name="NUM">0</field>
+      </shadow>
+    </value>
+  </block>
+  <block type="logic_operation" id="XRc0#kCxf`}~WbzrqeE7" disabled="true" x="573" y="1565">
+    <field name="OP">AND</field>
+  </block>
+  <block type="logic_operation" id="6:$zP735)CjbkSXBbr5$" disabled="true" x="580" y="1700">
+    <field name="OP">AND</field>
+    <value name="B">
+      <block type="math_number_property" id="?xg}!Gw7_`p4%X)i_LU_">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+        <field name="PROPERTY">EVEN</field>
+        <value name="NUMBER_TO_CHECK">
+          <shadow type="math_number" id="@Ew[[=Ev*q)6Lq?[oUK(">
+            <field name="NUM">0</field>
+          </shadow>
+          <block type="variables_get" id="9*zXRPd|dMB[%0[^A0UF">
+            <field name="VAR" id="Yc2(?I]yhjR)7r#JH(GU">2ndLastDigit</field>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="math_number_property" id="q-?R=ovp|P$rnG%+tdzv" disabled="true" x="369" y="1952">
+    <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+    <field name="PROPERTY">ODD</field>
+    <value name="NUMBER_TO_CHECK">
+      <shadow type="math_number" id="@Ew[[=Ev*q)6Lq?[oUK(">
+        <field name="NUM">0</field>
+      </shadow>
+      <block type="variables_get" id="2Kc3,ZHdn3[~=;%nK%^/">
+        <field name="VAR" id="Yc2(?I]yhjR)7r#JH(GU">2ndLastDigit</field>
+      </block>
+    </value>
+  </block>
+  <block type="logic_operation" id=",.0@Z{m`ug3~GoN,/X%$" disabled="true" x="0" y="2105">
+    <field name="OP">AND</field>
+    <value name="B">
+      <block type="logic_operation" id="bw)RyyP^%LHj19ST2`L$">
+        <field name="OP">AND</field>
+        <value name="A">
+          <block type="math_number_property" id="d+X~-~-W8d{si.bQmB.S">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+            <field name="PROPERTY">ODD</field>
+            <value name="NUMBER_TO_CHECK">
+              <shadow type="math_number" id="@Ew[[=Ev*q)6Lq?[oUK(">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="variables_get" id="{R,dOvxf?b!S4O!0Y,6_">
+                <field name="VAR" id="0#dL~P-qJAHY0vE|j[Un">3rdLastDigit</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="B">
+          <block type="math_number_property" id="=Ce[(_}w:yK+*}VB8P5i">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+            <field name="PROPERTY">EVEN</field>
+            <value name="NUMBER_TO_CHECK">
+              <shadow type="math_number" id="@Ew[[=Ev*q)6Lq?[oUK(">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="variables_get" id="ioN;@Cf.JpO+D4/fjQ7A">
+                <field name="VAR" id="kOkCBOE^nOst/^CC%ZIj">4thLastDigit</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="logic_operation" id="b1tc~OA{Fk.c~qCiQsr`" disabled="true" x="0" y="2217">
+    <field name="OP">AND</field>
+    <value name="B">
+      <block type="logic_operation" id="wbSt=MI]FU`wyIYHBGA0">
+        <field name="OP">AND</field>
+        <value name="A">
+          <block type="math_number_property" id=";S9LTtcMznW1w)k47[?`">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+            <field name="PROPERTY">EVEN</field>
+            <value name="NUMBER_TO_CHECK">
+              <shadow type="math_number" id="@Ew[[=Ev*q)6Lq?[oUK(">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="variables_get" id="YBK#S,uUv{=$_GxLP|4K">
+                <field name="VAR" id="0#dL~P-qJAHY0vE|j[Un">3rdLastDigit</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="B">
+          <block type="math_number_property" id="ReKG|GF`^7:*YvTgWrvn">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+            <field name="PROPERTY">ODD</field>
+            <value name="NUMBER_TO_CHECK">
+              <shadow type="math_number" id="@Ew[[=Ev*q)6Lq?[oUK(">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="variables_get" id="Y,*:#ct;2lU~L65J+8[q">
+                <field name="VAR" id="kOkCBOE^nOst/^CC%ZIj">4thLastDigit</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="variables_set" id="|K=P=DZoKn#LMh9]^C(E" disabled="true" x="0" y="2329">
+    <field name="VAR" id="bApXT1A,+eLl!Y[O8Th*">Stake</field>
+    <value name="VALUE">
+      <block type="math_arithmetic" id="_s1?k]`sa9Op-$Vt^`*%">
+        <field name="OP">MULTIPLY</field>
+        <value name="A">
+          <shadow type="math_number" id="vUE`}w#`{hV$sqnI=Ikk">
+            <field name="NUM">1</field>
+          </shadow>
+          <block type="variables_get" id="w5}.]6ZGX%|=-`xQ@R_S">
+            <field name="VAR" id="bApXT1A,+eLl!Y[O8Th*">Stake</field>
+          </block>
+        </value>
+        <value name="B">
+          <shadow type="math_number" id="`II4i]}4#Z_alt$s_-az">
+            <field name="NUM">1</field>
+          </shadow>
+          <block type="variables_get" id="yYC_4g:9p^Gkcc-VIFtN">
+            <field name="VAR" id="lCN)@wBBD%s95n*|krf;">Martingale</field>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="variables_set" id="SJPioV6|p+]56G77C|l_" disabled="true" x="0" y="2441">
+    <field name="VAR" id="bApXT1A,+eLl!Y[O8Th*">Stake</field>
+    <value name="VALUE">
+      <block type="variables_get" id="E_7*[6`$^2ln=9GRrHQ/">
+        <field name="VAR" id="pWX~7zBFdJ9*{g_mFK,1">InitialStake</field>
+      </block>
+    </value>
+  </block>
+  <block type="contract_check_result" id="(A((g!R3XcT[8-yjp*BX" disabled="true" x="0" y="2545">
+    <field name="CHECK_RESULT">loss</field>
+  </block>
+</xml>

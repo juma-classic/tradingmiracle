@@ -1,0 +1,15 @@
+{
+  "name": "tradersden-theme-builder",
+  "version": "1.0.0",
+  "description": "Build system for integrating main SCSS theme with standalone HTML files",
+  "scripts": {
+    "build-themes": "sass theme-integration.scss theme-integration.css --style=compressed",
+    "watch-themes": "sass theme-integration.scss theme-integration.css --watch --style=compressed",
+    "build-all": "npm run build-themes && npm run copy-assets",
+    "copy-assets": "echo 'Copying compiled CSS to theme files'",
+    "dev": "npm run watch-themes"
+  },
+  "devDependencies": {
+    "sass": "^1.69.0"
+  }
+}

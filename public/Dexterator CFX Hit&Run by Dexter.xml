@@ -1,0 +1,69 @@
+<block type="controls_whileUntil" id="wait_for_7_8_9">
+  <field name="MODE">WHILE</field>
+  <value name="BOOL">
+    <block type="logic_negate">
+      <value name="BOOL">
+        <block type="logic_operation">
+          <field name="OP">OR</field>
+          <value name="A">
+            <block type="logic_operation">
+              <field name="OP">OR</field>
+              <value name="A">
+                <block type="logic_compare">
+                  <field name="OP">EQ</field>
+                  <value name="A">
+                    <block type="last_digit"/>
+                  </value>
+                  <value name="B">
+                    <block type="math_number">
+                      <field name="NUM">7</field>
+                    </block>
+                  </value>
+                </block>
+              </value>
+              <value name="B">
+                <block type="logic_compare">
+                  <field name="OP">EQ</field>
+                  <value name="A">
+                    <block type="last_digit"/>
+                  </value>
+                  <value name="B">
+                    <block type="math_number">
+                      <field name="NUM">8</field>
+                    </block>
+                  </value>
+                </block>
+              </value>
+            </block>
+          </value>
+          <value name="B">
+            <block type="logic_compare">
+              <field name="OP">EQ</field>
+              <value name="A">
+                <block type="last_digit"/>
+              </value>
+              <value name="B">
+                <block type="math_number">
+                  <field name="NUM">9</field>
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>
+  </value>
+  <statement name="DO">
+    <block type="sleep">
+      <field name="SECONDS">1</field>
+    </block>
+  </statement>
+  <next>
+    <block type="variables_set" id="set_entry_digit">
+      <field name="VAR" id="}$$cYRo7Tm^ZlLEY`rNm">Entry Point</field>
+      <value name="VALUE">
+        <block type="last_digit"/>
+      </value>
+    </block>
+  </next>
+</block>

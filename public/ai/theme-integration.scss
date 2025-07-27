@@ -1,0 +1,385 @@
+// SCSS Theme Integration for Standalone HTML Files
+// This file should be compiled to CSS and included in theme HTML files
+
+// Import main theme variables from the React app
+// Note: In a real build process, these would be imported from the actual SCSS files
+
+// Main theme variables (copied from main.scss)
+:root {
+  // Navy Blue Theme (matching main.scss)
+  --navy-blue: #1e3a8a;
+  --dark-navy: #1e40af;
+  --light-navy: #3b82f6;
+  --navy-gradient: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 50%, var(--light-navy) 100%);
+  
+  // Accent colors
+  --accent1: #3b82f6;
+  --accent2: #8b5cf6;
+  --accent-gradient: linear-gradient(135deg, var(--accent1), var(--accent2));
+  
+  // Text colors
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.5);
+  
+  // Background and surface colors
+  --bg-primary: var(--navy-gradient);
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --card-bg-hover: rgba(255, 255, 255, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  
+  // Border colors
+  --border-normal: rgba(255, 255, 255, 0.2);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.3);
+  
+  // Status colors
+  --status-success: #22c55e;
+  --status-warning: #f59e0b;
+  --status-danger: #ef4444;
+  --status-info: #06b6d4;
+  
+  // Shadows
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  
+  // Glass morphism
+  --glass-backdrop: blur(20px);
+  --glass-backdrop-strong: blur(30px);
+  
+  // Typography
+  --font-primary: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
+  
+  // Spacing scale
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  
+  // Border radius
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  
+  // Transitions
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+// Base styles for all theme files
+.theme-base {
+  font-family: var(--font-primary);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  
+  * {
+    box-sizing: border-box;
+  }
+}
+
+// Modern button styles (matching main.scss)
+.btn {
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  font-family: var(--font-primary);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+.btn-primary {
+  background: var(--accent-gradient);
+  color: white;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-normal);
+  backdrop-filter: var(--glass-backdrop);
+  
+  &:hover {
+    background: var(--card-bg-hover);
+    border-color: var(--accent1);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  
+  &:hover {
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    border-color: var(--border-normal);
+  }
+}
+
+// Glass morphism card styles (matching main.scss)
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-normal);
+  border-radius: var(--radius-xl);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--border-strong);
+  }
+}
+
+.glass-card-strong {
+  @extend .glass-card;
+  backdrop-filter: var(--glass-backdrop-strong);
+  -webkit-backdrop-filter: var(--glass-backdrop-strong);
+}
+
+// Modern form elements
+.form-control {
+  background: var(--card-bg);
+  border: 1px solid var(--border-normal);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-size: 14px;
+  transition: all var(--transition-normal);
+  backdrop-filter: var(--glass-backdrop);
+  
+  &:focus {
+    outline: none;
+    border-color: var(--accent1);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  &::placeholder {
+    color: var(--text-muted);
+  }
+}
+
+// Status indicators
+.status-indicator {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &.success {
+    background: rgba(34, 197, 94, 0.2);
+    color: var(--status-success);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+  }
+  
+  &.warning {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--status-warning);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+  
+  &.danger {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--status-danger);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+  
+  &.info {
+    background: rgba(6, 182, 212, 0.2);
+    color: var(--status-info);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+  }
+}
+
+// Grid layouts
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+// Utility classes
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.text-success { color: var(--status-success); }
+.text-warning { color: var(--status-warning); }
+.text-danger { color: var(--status-danger); }
+.text-info { color: var(--status-info); }
+
+.bg-glass { background: var(--glass-bg); }
+.bg-card { background: var(--card-bg); }
+
+.border-normal { border: 1px solid var(--border-normal); }
+.border-subtle { border: 1px solid var(--border-subtle); }
+.border-strong { border: 1px solid var(--border-strong); }
+
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-2xl { border-radius: var(--radius-2xl); }
+
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+
+.backdrop-blur { backdrop-filter: var(--glass-backdrop); }
+.backdrop-blur-strong { backdrop-filter: var(--glass-backdrop-strong); }
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in { animation: fadeIn 0.5s ease-out; }
+.animate-slide-in { animation: slideIn 0.5s ease-out; }
+.animate-pulse { animation: pulse 2s infinite; }
+.animate-spin { animation: spin 1s linear infinite; }
+
+// Responsive typography
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.h1 { font-size: 2.5rem; }
+.h2 { font-size: 2rem; }
+.h3 { font-size: 1.75rem; }
+.h4 { font-size: 1.5rem; }
+.h5 { font-size: 1.25rem; }
+.h6 { font-size: 1rem; }
+
+@media (max-width: 768px) {
+  .h1 { font-size: 2rem; }
+  .h2 { font-size: 1.75rem; }
+  .h3 { font-size: 1.5rem; }
+  .h4 { font-size: 1.25rem; }
+}
+
+// Theme-specific overrides for existing minimalist styles
+[data-theme="minimalist"] {
+  .dashboard-wrapper,
+  .container {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-normal) !important;
+    backdrop-filter: var(--glass-backdrop) !important;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .btn {
+    font-family: var(--font-primary) !important;
+  }
+  
+  select, input, textarea {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-normal) !important;
+    color: var(--text-primary) !important;
+    backdrop-filter: var(--glass-backdrop) !important;
+  }
+}
