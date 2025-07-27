@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="minimalist">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minimalist Trading Analysis - Clean and simple trading tool for Deriv markets">
+    <meta name="keywords" content="minimalist, trading, analysis, deriv, volatility, charts, forex, clean">
+    <meta name="author" content="Minimalist Analytics">
+    <meta name="theme-color" content="#1e3a8a">
+    
+    <title>📊 Minimalist Trading Analytics</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="minimalist.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    
+    <!-- Minimalist Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    
+    <!-- Charts and Fonts -->
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@3.8.0/dist/lightweight-charts.standalone.production.js"></script>
+    
+    <!-- Clean Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="minimalist.css">
+</head>
+<body>
+    <!-- Theme Switch Button -->
+    <button class="theme-switch" id="themeSwitch">🎨 Switch Theme</button>
+    
+    <div class="container">
+        <header>
+            <h1>Minimalist Trading Analytics</h1>
+            
+            <div class="market-controls">
+                <div class="market-selector">
+                    <label for="symbol">Market:</label>
+                    <select id="symbol" aria-label="Select trading market">                
+                        <option value="R_10">Volatility 10 Index</option>
+                        <option value="R_10_1S">Volatility 10 (1s) Index</option>
+                        <option value="R_25">Volatility 25 Index</option>
+                        <option value="R_25_1S">Volatility 25 (1s) Index</option>
+                        <option value="R_50">Volatility 50 Index</option>
+                        <option value="R_50_1S">Volatility 50 (1s) Index</option>
+                        <option value="R_75">Volatility 75 Index</option>
+                        <option value="R_75_1S">Volatility 75 (1s) Index</option>
+                        <option value="R_100">Volatility 100 Index</option>
+<!DOCTYPE html>
+<html lang="en" data-theme="minimalist">
+<head>
+                        <option value="R_100_1S">Volatility 100 (1s) Index</option>
+                        <option value="1HZ10V">Jump 10 Index</option>
+                        <option value="1HZ25V">Jump 25 Index</option>
+                        <option value="1HZ50V">Jump 50 Index</option>
+                        <option value="1HZ75V">Jump 75 Index</option>
+                        <option value="1HZ100V">Jump 100 Index</option>
+                        <option value="BOOM300N">Boom 300 Index</option>
+                        <option value="BOOM500N">Boom 500 Index</option>
+                        <option value="BOOM1000N">Boom 1000 Index</option>
+                        <option value="CRASH300N">Crash 300 Index</option>
+                        <option value="CRASH500N">Crash 500 Index</option>
+                        <option value="CRASH1000N">Crash 1000 Index</option>
+                    </select>
+                </div>
+                <div class="timeframe-selector">
+                    <label for="timeframe">Time Frame:</label>
+                    <select id="timeframe">
+                        <option value="60">1 Minute</option>
+                        <option value="120" selected>2 Minutes</option>
+                        <option value="300">5 Minutes</option>
+                        <option value="900">15 Minutes</option>
+                    </select>
+                </div>
+                <div id="status" class="status-connecting">Connecting...</div>
+            </div>
+        </header>
+
+        <div class="chart-digit-container">
+            <div class="chart-container" id="priceChart"></div>
+            <div class="digit-display" id="digitDisplay"></div>
+        </div>
+    
+        <div class="pattern-analysis">
+            <h3>Pattern Analysis</h3>
+            <h1>Advanced Trading Analytics</h1>
+                <div class="pattern-box">
+                    <span>Recent Sequence:</span>
+                    <span id="lastTenDigits">Loading...</span>
+                </div>
+                <div class="pattern-box">
+                    <span>Common Pattern:</span>
+                    <span id="commonSequence">Analyzing...</span>
+                </div>
+                <div class="pattern-box">
+                    <span>Candle Pattern:</span>
+                    <span id="candlePattern">Waiting...</span>
+                </div>
+                <div class="pattern-box">
+                    <span>Trend Direction:</span>
+                    <span id="trendDirection">Neutral</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <button id="resetStats" class="btn">Reset Statistics</button>
+            <button id="toggleSound" class="btn" disabled>Audio Disabled</button>
+            <button id="exportData" class="btn">Export Data</button>
+            <div class="live-indicator">
+                <span>Live Data Status</span>
+            </div>
+        </div>
+        
+        <!-- Statistics Panel -->
+        <div class="stats">
+            <div class="stat-box">
+                <span>Total Ticks:</span>
+                <span id="totalTicks">0</span>
+            </div>
+            <div class="stat-box">
+                <span>Current Digit:</span>
+                <span id="currentDigit">-</span>
+            </div>
+            <div class="stat-box">
+                <span>Market Price:</span>
+                <span id="currentPrice">-</span>
+            </div>
+            <div class="stat-box" id="currentCandlePrice">
+                <span>Candle Price:</span>
+                <span id="candlePriceValue">-</span>
+            </div>
+            <div class="stat-box">
+                <span>Hot Digits:</span>
+                <span id="hotDigit">-</span>
+            </div>
+            <div class="stat-box">
+                <span>Cold Digits:</span>
+                <span id="coldDigit">-</span>
+            </div>
+            <div class="stat-box">
+                <span>Analysis Status:</span>
+                <span id="analysisStatus">Waiting...</span>
+            </div>
+            <div class="stat-box">
+                <span>Connection:</span>
+                <span id="liveStatus">Offline</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="digits.js"></script>
+</body>
+</html>
