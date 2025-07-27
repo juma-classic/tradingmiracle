@@ -102,7 +102,7 @@
 
             themeToggle.addEventListener('click', () => {
                 const currentTheme = body.getAttribute('data-theme');
-                const newTheme = currentTheme === 'navy' ? 'light' : 'navy';
+                const newTheme = currentTheme === 'navy' ? 'light': 'navy';
 
                 body.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);

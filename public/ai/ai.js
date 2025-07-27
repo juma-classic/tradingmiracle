@@ -540,3 +540,4 @@ function updateLast50OE() {
 // Start WebSocket on page load
 startWebSocket();
 initializeCharts();
+
